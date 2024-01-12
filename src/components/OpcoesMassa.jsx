@@ -23,7 +23,7 @@ function OpcaoMassa({ id, value, onCheck }) {
           value={value}
           onClick={onCheck} 
       />
-      <label htmlFor={"radioBase" + id}>
+      <label onClick={onCheck} htmlFor={"radioBase" + id}>
         <img className="img-icon" src={url} alt={value} />
       </label>
     </li>
