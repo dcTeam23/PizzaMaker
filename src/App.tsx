@@ -10,36 +10,46 @@ import { PizzaScreen } from "./components/PizzaScreen";
 
 const initState = { 
   borda: "fina", 
-  molho: "amarelo", 
+  molho: "vermelho", 
   tipo: ["verdura", "carne"] 
 };
 
 function App() {
   const [state, _setState] = useState(initState);
-
-  // setState({ borda: "", molho: "", tipo: [] }); //certa
+  const [isMakerVisible, setIsMakerVisible] = useState(true);
 
   return (
     <>
-      {/* <div id="screenMaker">
-        <Header />
-
-        <div className="row">
-          <OpcoesMassa />
-          <OpcoesMolho />
-        </div>
-        <div className="row">
-          <OpcoesTipo />
-          <ImgClient />
-        </div>
-        <footer>
-          <button className="hidden"> ➡️ </button>
-        </footer>
-      </div> */}
-
+      { isMakerVisible ? 
+       <MakerScreen submit={() => setIsMakerVisible(false)} /> :
       <PizzaScreen molho={state.molho} borda={state.borda} tipos={state.tipo} />
+      }
+     
+      <button onClick={() => {
+        setIsMakerVisible(true);
+      }}> ◀️ </button>
+     
     </>
   );
 }
 
 export default App;
+
+function MakerScreen({submit}: {submit: () => void}) {
+  return <div id="screenMaker">
+    <Header />
+
+    <div className="row">
+      <OpcoesMassa />
+      <OpcoesMolho />
+    </div>
+    <div className="row">
+      <OpcoesTipo />
+      <ImgClient />
+    </div>
+    <footer>
+      <button onClick={submit}> ➡️ </button>
+    </footer>
+  </div>;
+}
+
