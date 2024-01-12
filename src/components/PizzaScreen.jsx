@@ -66,9 +66,7 @@ export function PizzaScreen({ molho, tipos, borda }) {
         }
         
       </div>
-      <footer>
-        <button id="buttonBack">⬅️</button>
-      </footer>
+
     </section>
   );
 }

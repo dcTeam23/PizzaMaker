@@ -22,13 +22,11 @@ function App() {
     <>
       { isMakerVisible ? 
        <MakerScreen submit={() => setIsMakerVisible(false)} /> :
-      <PizzaScreen molho={state.molho} borda={state.borda} tipos={state.tipo} />
+        <PizzaScreen molho={state.molho} borda={state.borda} tipos={state.tipo} />
       }
-     
-      <button onClick={() => {
-        setIsMakerVisible(true);
-      }}> ◀️ </button>
-     
+      {
+        !isMakerVisible && <button onClick={() => setIsMakerVisible(true)}> ⬅️ </button> 
+      }
     </>
   );
 }
