@@ -4,12 +4,10 @@ import "./App.css";
 
 import { PizzaScreen } from "./components/PizzaScreen";
 import { MakerScreen } from "./components/MakerScreen";
+import { initState } from "./state";
 
-const initState = { 
-  borda: "fina", 
-  molho: "vermelho", 
-  tipo: ["verdura", "carne"] 
-};
+
+
 
 function App() {
   const [state, _setState] = useState(initState);
@@ -18,12 +16,15 @@ function App() {
   return (
     <>
       { isMakerVisible ? 
-        <MakerScreen onChange={_setState} submit={() => setIsMakerVisible(false)} /> :
+        <MakerScreen onChange={_setState} /> :
         <PizzaScreen molho={state.molho} borda={state.borda} tipos={state.tipo} />
       }
       {
+        isMakerVisible && <button onClick={() => setIsMakerVisible(false)}> ➡️ </button>}
+      {
         !isMakerVisible && <button onClick={() => setIsMakerVisible(true)}> ⬅️ </button> 
       }
+
     </>
   );
 }

@@ -4,42 +4,63 @@ import { OpcoesMassa } from "./OpcoesMassa";
 import { OpcoesMolho } from "./OpcoesMolho";
 import { OpcoesTipo } from "./OpcoesTipo";
 
-export function MakerScreen({submit, onChange}) {
+
+/**
+ * @typedef {import("../state").State} xState
+ * @typedef {(s: xState) => xState} Callback
+ */
+
+/**
+ * @param {{onChange: (c: Callback) => void}} props 
+ */
+export function MakerScreen({onChange}) {
+  /**
+   * @param {'fina'|'tradicional'|'borda'} value 
+   */
   const changeBorda = (value) => {
     onChange((atual) => ({...atual, borda: value}));
   };
 
-  const changeMolho = () => {
-    const molho = 'vermelho';
+  /**
+   * @param {'vermelho'|'amarelo'} value 
+   */
+  const changeMolho = (/** @type {string}*/ molho) => {
     onChange((atual) => ({...atual, molho: molho}));
   };
 
-  const changeTipo = () => {
-    const tipo = ['carne'];
-    onChange((atual) => ({...atual, tipo: tipo}));
+  /**
+   * @param {['carne', 'verdura', boolean]} param 
+   */
+  const changeTipo = ([name, checked]) => {
+    onChange((atual) => {
+      let newvalue = Array.from(atual.tipo); //create a copy from actual value
+
+      if (!checked) {
+        //remove
+        newvalue = newvalue.filter((val) => name !== val);
+      } else {
+        
+        if (!newvalue.some((val) => val === name)){
+          //add
+          newvalue.push(name);
+        }
+      }
+      return ({...atual, tipo: newvalue})
+    });
   };
 
   
   return <div id="screenMaker">
     <Header />
-
     <div className="row">
-      {/* `onChange(
-            (s) => ({...s, massa: 'vermelha'})
-          )`
-       quando a Massa for escolhida */}
       <OpcoesMassa onMassa={changeBorda} />
-      {/* `onChange()` quando o Molho for escolhido */}
-      <OpcoesMolho />
+      <OpcoesMolho onMolho={changeMolho} />
     </div>
     <div className="row">
-      {/* `onChange()` quando o Tipo for escolhido */}
-      <OpcoesTipo />
+      <OpcoesTipo onTipo={changeTipo} />
       <ImgClient />
     </div>
-    <footer>
-      <button onClick={submit}> ➡️ </button>
-    </footer>
+
   </div>;
 }
 
