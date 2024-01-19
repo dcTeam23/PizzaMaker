@@ -33,11 +33,11 @@ export function PizzaScreen({ molho, tipos, borda }) {
 
   if (tipos.length === 2) {
     tipoUrl =
-      "https://studio.code.org/v3/assets/ai36I_gY5JPKznE1ttg-CqVl0NhRRSPu1b34n7Ctx6c/Non-veg.png?t=1671892191000";
+      "https://studio.code.org/v3/assets/1M0wVT7H--jMKxjDJMc3ZQZGs7pYH3KRZNxtxFT3m3U/veg-nonveg.png?t=1670932317000";
   } else {
     if (tipos[0] === "carne") {
       tipoUrl =
-        "https://studio.code.org/v3/assets/1M0wVT7H--jMKxjDJMc3ZQZGs7pYH3KRZNxtxFT3m3U/veg-nonveg.png?t=1670932317000";
+      "https://studio.code.org/v3/assets/ai36I_gY5JPKznE1ttg-CqVl0NhRRSPu1b34n7Ctx6c/Non-veg.png?t=1671892191000";
     }
     if (tipos[0] === "verdura") {
       tipoUrl =
