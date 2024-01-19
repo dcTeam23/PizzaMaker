@@ -1,11 +1,7 @@
 /**
- * @typedef {Object} Props
- * @property {string} Props.molho - pode ser `vermelho` ou `amarelo`
- * @property {string} Props.borda - pode ser `borda`, `tradicional` ou `fina`
- * @property {Array<string>} Props.tipos - pode ser `carne` ou `verdura`
+ * @typedef {import('../state').State} Props
  *
  * @param {Props} props
- * @returns
  */
 export function PizzaScreen({ molho, tipos, borda }) {
   let bordaTipo = "";
@@ -24,10 +20,15 @@ export function PizzaScreen({ molho, tipos, borda }) {
 
   const bordaUrl = `https://studio.code.org/v3/assets/1M0wVT7H--jMKxjDJMc3ZQZGs7pYH3KRZNxtxFT3m3U/${bordaTipo}.png?t=1670932317000`;
 
-  const molhoUrl =
-    molho === "amarelo"
-      ? `https://studio.code.org/v3/assets/1M0wVT7H--jMKxjDJMc3ZQZGs7pYH3KRZNxtxFT3m3U/Pizzaa-04.png?t=1670932317000`
-      : `https://studio.code.org/v3/assets/1M0wVT7H--jMKxjDJMc3ZQZGs7pYH3KRZNxtxFT3m3U/Pizzaa-05.png?t=1670932317000`;
+  let molhoUrl = '';
+  switch( molho){
+    case "amarelo":
+      molhoUrl = 'https://studio.code.org/v3/assets/1M0wVT7H--jMKxjDJMc3ZQZGs7pYH3KRZNxtxFT3m3U/Pizzaa-04.png?t=1670932317000';
+      break;
+    case "vermelho": 
+      molhoUrl = 'https://studio.code.org/v3/assets/1M0wVT7H--jMKxjDJMc3ZQZGs7pYH3KRZNxtxFT3m3U/Pizzaa-05.png?t=1670932317000';
+      break;
+  } 
 
   let tipoUrl;
 
@@ -48,9 +49,9 @@ export function PizzaScreen({ molho, tipos, borda }) {
   return (
     <section id="screenPizza">
       <div id="imagens">
-        <img id="imageBase" src={bordaUrl} alt="massa" />
+        {bordaTipo && <img id="imageBase" src={bordaUrl} alt="massa" />}
 
-        <img src={molhoUrl} alt="molho" />
+        {molhoUrl && <img src={molhoUrl} alt="molho" />}
 
         {tipoUrl && <img src={tipoUrl} alt="recheio" />}
       </div>
