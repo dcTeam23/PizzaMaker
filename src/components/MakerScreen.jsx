@@ -33,7 +33,7 @@ export function MakerScreen({onChange}) {
    */
   const changeTipo = ([name, checked]) => {
     onChange((atual) => {
-      let newvalue = Array.from(atual.tipo); //create a copy from actual value
+      let newvalue = Array.from(atual.tipos); //create a copy from actual value
 
       if (!checked) {
         //remove
@@ -45,7 +45,7 @@ export function MakerScreen({onChange}) {
           newvalue.push(name);
         }
       }
-      return ({...atual, tipo: newvalue})
+      return ({...atual, tipos: newvalue})
     });
   };
 
